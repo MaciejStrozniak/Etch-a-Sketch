@@ -9,8 +9,8 @@
 } 
 
 body {
-    width: 1000px;
-    height: 1000px;
+    width: 100vw;
+    height: 100vh;
     background-color: #119134;
     border: 4px black solid;
     display: flex;
@@ -19,8 +19,8 @@ body {
 }
 
 #squares-container {
-    height: 80%;
-    width: 80%;
+    height: 800px;
+    width: 800px;
     display: flex;
     flex-wrap: wrap;
     border: 2px solid white;
@@ -30,13 +30,13 @@ body {
     /* width: 2em;
     height: 2em; */
 
-    height: 62.5px;
-    width: 62.5px;
+    height: 49.75px;
+    width: 49.75px;
     display: flex;
     background-color: aquamarine;
-    border: 1px solid blue;
-    flex-shrink: 0;
-    flex: 1;
+    /* border: 1px solid blue; */
+    /* flex-shrink: 0; */
+    /* flex: 1; */
     justify-content: center;
     align-items: center;
 }
