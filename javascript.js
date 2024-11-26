@@ -14,28 +14,56 @@ bodyEl.appendChild(buttonToChangeGrid);
 
 const containerSize = 800;
 let gridSize = 16;
-let smallSquareSize = containerSize / gridSize;
 
-function createSmallSquare() {
+function createSquare(gridSize) {
+    let smallSquareSize = containerSize / gridSize;
+
     const divEl = document.createElement("div");
     divEl.style.height = `${smallSquareSize.toString()}px`;
     divEl.style.width = `${smallSquareSize.toString()}px`;
-    divEl.style.border = "solid 2px grey";
+    divEl.style.border = "solid 0.5px grey";
     divEl.classList.add("grid-div");
 
     return divEl;
 }
 
-for(i=0; i < gridSize * gridSize; i++) {
-    const divEl = createSmallSquare();
-    divEl.textContent = `${i}`;
-    squaresContainer.appendChild(divEl);
+function removeSquares(gridSize) {
+
+    const elToRemove = document.querySelectorAll(".grid-div");
+
+    elToRemove.forEach((el) => {
+        squaresContainer.removeChild(el);
+    });
+}
+
+function createGrid(gridSize) {
+    for(i=0; i < gridSize * gridSize; i++) {
+        const divEl = createSquare(gridSize);
+        squaresContainer.appendChild(divEl);
+    }
 };
 
-buttonToChangeGrid.addEventListener("click", () => {
-    let newGridSize;
-    
-    if(buttonToChangeGrid.id === "Change-grid-btn")
-        newGridSize = prompt("Choose size between 1 and 100");
-});
+createGrid(gridSize);
 
+buttonToChangeGrid.addEventListener("click", () => {
+    
+    if(buttonToChangeGrid.id === "Change-grid-btn") {
+    
+        let loop = true;
+
+        gridSize = prompt("Choose size of grid between 1 and 100");
+        gridSize = Number(gridSize);
+        while(loop) {
+            if(gridSize == null || typeof(gridSize) !== "number" || isNaN(gridSize))
+                gridSize = prompt("Wrong value. Choose size between 1 and 100");
+            
+            if(gridSize > 100 || gridSize <= 1)
+                gridSize = prompt("Wrong size of grid. Choose size between 1 and 100");
+            else
+                loop = false;
+        }
+
+        removeSquares(gridSize);
+        createGrid(gridSize);
+    }
+});
