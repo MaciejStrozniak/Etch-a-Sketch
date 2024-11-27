@@ -65,6 +65,7 @@ function resetGridColor() {
 
     elToReset.forEach((el) => {
         el.style.backgroundColor = "rgb(100, 242, 127)";
+        el.style.opacity = "1";
         el.classList.remove("hovered");
     });
 }
@@ -131,13 +132,13 @@ document.body.addEventListener("mouseover", (e) => {
 
         let targetOpacity = parseFloat(target.style.opacity) || 1;
 
-        if(targetOpacity => 0) {
+        if(targetOpacity > 0) {
             log(target.style.opacity)
             target.style.opacity = targetOpacity - 0.1;
         }
     }
         
-    else if(target.classList.contains("grid-div")) {
+    else if(classes.contains("grid-div") && !classes.contains("hovered")) {
         target.style.backgroundColor = getRandomRGBColor();
         classes.add("hovered");
     }        
