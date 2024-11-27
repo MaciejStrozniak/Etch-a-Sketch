@@ -20,13 +20,15 @@ const buttonToResetGrid = document.createElement("button");
 buttonToResetGrid.id = buttonToResetId;
 buttonToResetGrid.textContent = "Reset grid\nClick or press spacebar";
 
-bodyEl.appendChild(squaresContainer);
-bodyEl.appendChild(buttonsContainer);
-buttonsContainer.appendChild(buttonToChangeGrid);
-buttonsContainer.appendChild(buttonToResetGrid);
-
 const containerSize = 800;
 let gridSize = 16;
+
+function addElementsToHTML() {
+    bodyEl.appendChild(buttonsContainer);
+    bodyEl.appendChild(squaresContainer);
+    buttonsContainer.appendChild(buttonToChangeGrid);
+    buttonsContainer.appendChild(buttonToResetGrid);
+}
 
 function createSquare(gridSize) {
     let smallSquareSize = containerSize / gridSize;
@@ -63,6 +65,7 @@ function resetGridColor() {
 
     elToReset.forEach((el) => {
         el.style.backgroundColor = "rgb(100, 242, 127)";
+        el.classList.remove("hovered");
     });
 }
 
@@ -86,6 +89,15 @@ function generateNewGrid() {
     userPrompt();
     removeSquares(gridSize);
     createGrid(gridSize);
+}
+
+function getRandomRGBColor() {
+    // Generate random RGB values between 0 and 255
+    const r = Math.floor(Math.random() * 256); // Random red value
+    const g = Math.floor(Math.random() * 256); // Random green value
+    const b = Math.floor(Math.random() * 256); // Random blue value
+
+    return `rgb(${r}, ${g}, ${b})`; // Return the RGB color string
 }
 
 buttonToChangeGrid.addEventListener("click", () => {
@@ -112,10 +124,26 @@ document.body.addEventListener("keydown", (e) => {
 
 document.body.addEventListener("mouseover", (e) => {
     const target = e.target;
+    let classes = target.classList;
 
-    if(target.classList.contains("grid-div"))
-        target.style.backgroundColor = "black";        
+
+    if(classes.contains("grid-div") && classes.contains("hovered")) {
+
+        let targetOpacity = parseFloat(target.style.opacity) || 1;
+
+        if(targetOpacity => 0) {
+            log(target.style.opacity)
+            target.style.opacity = targetOpacity - 0.1;
+        }
+    }
+        
+    else if(target.classList.contains("grid-div")) {
+        target.style.backgroundColor = getRandomRGBColor();
+        classes.add("hovered");
+    }        
+    
 });
 
 // DEFAULT SETUP
+addElementsToHTML();
 createGrid(gridSize);

@@ -22,9 +22,10 @@ body {
 #squares-container {
     height: 808px;
     width: 808px;
+    background-color: black;
+    border: 4px solid black;
     display: flex;
     flex-wrap: wrap;
-    border: 4px solid black;
 }
 
 #buttons-container {
