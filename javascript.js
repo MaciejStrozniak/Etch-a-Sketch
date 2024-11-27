@@ -1,26 +1,29 @@
 const log = console.log;
 const squaresContId = "squares-container";
-const buttonToChangeId = "Change-grid-btn";
-const buttonToResetId = "Reset-grid-btn";
+const buttonToChangeId = "change-grid-btn";
+const buttonContainerId = "buttons-container";
+const buttonToResetId = "reset-grid-btn";
 
 const bodyEl = document.querySelector("body");
 
 const squaresContainer = document.createElement("div");
 squaresContainer.id = squaresContId;
 
+const buttonsContainer = document.createElement("div");
+buttonsContainer.id = buttonContainerId;
+
 const buttonToChangeGrid = document.createElement("button");
 buttonToChangeGrid.id = buttonToChangeId;
-buttonToChangeGrid.textContent = "Change grid size";
-buttonToChangeGrid.style.margin = "10px 0px 0px 0px";
+buttonToChangeGrid.textContent = "Change grid size\nClick or press enter";
 
 const buttonToResetGrid = document.createElement("button");
 buttonToResetGrid.id = buttonToResetId;
-buttonToResetGrid.textContent = "Reset grid";
-buttonToResetGrid.style.margin = "10px 0px 0px 0px";
+buttonToResetGrid.textContent = "Reset grid\nClick or press spacebar";
 
 bodyEl.appendChild(squaresContainer);
-bodyEl.appendChild(buttonToChangeGrid);
-bodyEl.appendChild(buttonToResetGrid);
+bodyEl.appendChild(buttonsContainer);
+buttonsContainer.appendChild(buttonToChangeGrid);
+buttonsContainer.appendChild(buttonToResetGrid);
 
 const containerSize = 800;
 let gridSize = 16;
@@ -87,7 +90,7 @@ function generateNewGrid() {
 
 buttonToChangeGrid.addEventListener("click", () => {
     
-    if(buttonToChangeGrid.id === "Change-grid-btn")
+    if(buttonToChangeGrid.id === buttonToChangeId)
        generateNewGrid();
 });
 
@@ -97,7 +100,9 @@ document.addEventListener("keydown", (e) => {
 });
 
 buttonToResetGrid.addEventListener("click", () =>{
-    resetGridColor();
+    
+    if(buttonToResetGrid.id === buttonToResetId)
+        resetGridColor();
 });
 
 document.body.addEventListener("keydown", (e) => {
