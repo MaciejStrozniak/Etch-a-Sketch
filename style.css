@@ -38,8 +38,8 @@ body {
 button {
     height: 50px;
     width: 300px;
+    border: solid black 2px;
     background-color: white;
-    box-shadow: none;
     white-space: pre-wrap; /* Preserves line breaks in text */
     text-align: center;    /* Optional: Centers text */
 }
