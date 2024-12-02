@@ -39,6 +39,7 @@ function createSquare(gridSize) {
     divEl.style.backgroundColor = "rgb(100, 242, 127)";
     divEl.style.border = "solid 0.5px grey";
     divEl.classList.add("grid-div");
+    divEl.style.opacity = 1;
 
     return divEl;
 }
@@ -130,7 +131,7 @@ document.body.addEventListener("mouseover", (e) => {
 
     if(classes.contains("grid-div") && classes.contains("hovered")) {
 
-        let targetOpacity = parseFloat(target.style.opacity) || 1;
+        let targetOpacity = parseFloat(target.style.opacity);
 
         if(targetOpacity > 0) {
             log(target.style.opacity)
